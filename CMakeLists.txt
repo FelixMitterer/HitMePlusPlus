@@ -3,4 +3,8 @@ project(HitMePlusPlus)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(HitMePlusPlus main.cpp)
+add_executable(HitMePlusPlus
+    main.cpp
+    game_logic/card_handler.cpp
+    game_logic/card.cpp
+)
