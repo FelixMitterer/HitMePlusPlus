@@ -10,4 +10,5 @@ add_executable(HitMePlusPlus
         game_logic/dealer.cpp
         game_logic/player.cpp
         game_logic/hand.cpp
+        game_logic/game.cpp
 )

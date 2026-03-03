@@ -19,11 +19,13 @@ public:
     int cash;
     int hand_at_play; // for split cards determines which of the 2 hands is currently at play hand1 = 0, hand2 = 1
     bool is_split;
-    bool done;
+    bool done[2];
+    int bets;
 
     // Constructor
     Player();
 
+    void reset_round();
     // Execute action for player
     void action(CardHandler *card_handler, ActionType action_type, std::optional<int> bet_optional);
 

@@ -16,6 +16,8 @@ public:
     // Draw a card from a CardHandler
     void draw_card(CardHandler *card_handler);
 
+    void reset_round();
+
     // Recalculate hand_value
     void recalculate_value();
 

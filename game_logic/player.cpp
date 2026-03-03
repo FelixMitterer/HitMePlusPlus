@@ -9,9 +9,23 @@
         hands[0] = Hand();
         hand_at_play = 0;
         is_split = false;
-        done = false;
+        done[0] = false;
+        done[1] = true;
         cash = 100;
+        bets = 0;
     }
+
+
+void Player::reset_round() {
+    for (int i = 0; i < 2; i++) {
+        hands[i] = Hand();
+    }
+    done[0] = false;
+    done[1] = true;
+    hand_at_play = 0;
+    is_split = false;
+    bets = 0;
+}
 
 void Player::action(CardHandler *card_handler, ActionType action_type, std::optional<int> bet_optional) {
         switch (action_type) {
@@ -23,13 +37,28 @@ void Player::action(CardHandler *card_handler, ActionType action_type, std::opti
                 this->hit(card_handler, bet_optional);
                 break;
             case Stand:
-                done = true;
+                done[hand_at_play] = true;
                 break;
             case Split:
                 if (hands[hand_at_play].is_splitable) {
                     this->split();
                 }
-                break;
+                return;
+        }
+        if (is_split) {
+            switch (hand_at_play) {
+                case 0:
+                    if (is_split) {
+                        hand_at_play = 1;
+                    }
+                    break;
+                case 1:
+                    hand_at_play = 0;
+                    break;
+                default:
+                    std::cerr << "Error: requested Hand out of bounds";
+                    break;
+            }
         }
     }
 
@@ -40,26 +69,17 @@ int Player::get_hand_value() {
 
 void Player::hit(CardHandler *card_handler, std::optional<int> bet_optional) {
         cash -= bet_optional.value_or(0);
+        bets += bet_optional.value_or(0);
         hands[hand_at_play].draw_card(card_handler);
-        switch (hand_at_play) {
-            case 0:
-                if (is_split) {
-                    hand_at_play = 1;
-                }
-                break;
-            case 1:
-                hand_at_play = 0;
-                break;
-            default:
-                std::cerr << "Error: requested Hand out of bounds";
-                break;
-        }
+        done[hand_at_play] = hands[hand_at_play].busted;
     }
 
 void Player::split() {
+
         Card second_card = hands[0].pop_last_card();
         hands[1] = Hand( {second_card});
         is_split = true;
+        done[1] = false;
     }
 
 bool Player::is_busted() {
