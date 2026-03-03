@@ -16,6 +16,8 @@ public:
 
     CardHandler();
 
+    CardHandler(int number_of_decks);
+
     void print();
 
     Card draw_card();

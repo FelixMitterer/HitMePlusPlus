@@ -12,7 +12,12 @@
         done = hand.hand_value>=17;
     }
 
-    int Dealer::get_hand_value() {
+    void Dealer::reset_round() {
+        hand = Hand();
+        done = false;
+    }
+
+int Dealer::get_hand_value() {
         return this->hand.hand_value;
     }
 

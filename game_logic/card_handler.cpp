@@ -6,12 +6,19 @@
 
 
     CardHandler::CardHandler() {
+        CardHandler(1);
+    }
+
+    CardHandler::CardHandler(int number_of_decks) {
         cards = {};
-        for (int colour_int = Heart; colour_int <= Club; colour_int++) {
-            CardColour card_colour = static_cast<CardColour>(colour_int);
-            for (int type_int = Ace; type_int <= King; type_int++) {
-                CardType card_type = static_cast<CardType>(type_int);
-                cards.emplace_back(Card(card_colour, card_type));
+        for (int i = 0; i < number_of_decks; i++) {
+            for (int colour_int = Heart; colour_int <= Club; colour_int++) {
+                CardColour card_colour = static_cast<CardColour>(colour_int);
+                for (int type_int = Ace; type_int <= King; type_int++) {
+                    //CardType card_type = static_cast<CardType>(type_int);
+                    CardType card_type = Ten;
+                    cards.emplace_back(Card(card_colour, card_type));
+                }
             }
         }
     }
