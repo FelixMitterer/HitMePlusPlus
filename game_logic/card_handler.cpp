@@ -1,13 +1,11 @@
-#include "card.cpp"
+#include "card.h"
+#include "card_handler.h"
 #include<vector>
 #include<iostream>
 #include<random>
 
-class CardHandler {
-    public:
-    std::vector<Card> cards;
 
-    CardHandler() {
+    CardHandler::CardHandler() {
         cards = {};
         for (int colour_int = Heart; colour_int <= Club; colour_int++) {
             CardColour card_colour = static_cast<CardColour>(colour_int);
@@ -18,15 +16,15 @@ class CardHandler {
         }
     }
 
-    void print() {
+    void CardHandler::print() {
         for (Card& card : cards) {
             std::cout << card.to_string() << '\n';
             //std::cout << card.colour << " " << card.type << '\n';
         }
     }
 
-    Card draw_card() {
-        std::cout << (int) this->cards.size();
+    Card CardHandler::draw_card() {
+
         std::random_device rd;
         std::uniform_int_distribution dist(0, (int) this->cards.size()-1);
         int random_num = dist(rd);
@@ -36,5 +34,3 @@ class CardHandler {
         this->cards.pop_back();
         return card;
     }
-
-};

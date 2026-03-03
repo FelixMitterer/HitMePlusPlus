@@ -1,40 +1,14 @@
 #include <iostream>
 #include <string>
+#include "card.h"
 
-enum CardColour {
-    Heart,
-    Spade,
-    Diamond,
-    Club,
-};
 
-enum CardType {
-    Ace,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten,
-    Jack,
-    Queen,
-    King,
-};
-
-class Card {
-    public:
-    CardColour colour;
-    CardType type;
-
-    Card(const CardColour card_colour, const CardType type) {
+    Card::Card(const CardColour card_colour, const CardType type) {
         this->colour = card_colour;
         this->type = type;
     }
 
-    std::string to_string() {
+    std::string Card::to_string() {
        std::string string = "";
         switch (this->colour) {
             case Heart:
@@ -95,5 +69,34 @@ class Card {
         return string;
     }
 
-};
+    int Card::to_value() {
+        switch (this->type) {
+            case Ace:
+                return 11;
+            case Two:
+                return 2;
+            case Three:
+                return 3;
+            case Four:
+                return 4;
+            case Five:
+                return 5;
+            case Six:
+                return 6;
+            case Seven:
+                return 7;
+            case Eight:
+                return 8;
+            case Nine:
+                return 9;
+            case Ten:
+                return 10;
+            case Jack:
+                return 10;
+            case Queen:
+                return 10;
+            case King:
+                return 10;
+        }
+    }
 

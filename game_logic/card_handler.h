@@ -16,6 +16,10 @@ public:
     CardHandler();
 
     void print();
+
+    Card draw_card();
+
+
 };
 
 
