@@ -36,6 +36,8 @@ public:
     Card(CardColour card_colour, CardType card_type);
 
     std::string to_string();
+
+    int to_value();
 };
 
 
