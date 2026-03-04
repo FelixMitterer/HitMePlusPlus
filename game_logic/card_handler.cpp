@@ -15,8 +15,8 @@
             for (int colour_int = Heart; colour_int <= Club; colour_int++) {
                 CardColour card_colour = static_cast<CardColour>(colour_int);
                 for (int type_int = Ace; type_int <= King; type_int++) {
-                    //CardType card_type = static_cast<CardType>(type_int);
-                    CardType card_type = Ten;
+                    CardType card_type = static_cast<CardType>(type_int);
+                    //CardType card_type = Eight;  //DEBUG TOOL
                     cards.emplace_back(Card(card_colour, card_type));
                 }
             }
