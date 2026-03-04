@@ -16,8 +16,8 @@ enum ActionType {
 class Player {
 public:
     Hand hands[2]; //multiple in case of split
-    bool done[2];
-    int bets[2];
+    bool done[2]{};
+    int bets[2]{};
     int cash;
     int hand_at_play; // for split cards determines which of the 2 hands is currently at play hand1 = 0, hand2 = 1
     bool is_split;

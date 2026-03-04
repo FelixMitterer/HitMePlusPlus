@@ -4,7 +4,7 @@
 
 
 int main() {
-    Game game = Game(1);
+    Game game = Game(2);
     while (true) {
         game.play_round();
     }

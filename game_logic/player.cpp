@@ -18,8 +18,8 @@
 
 
 void Player::reset_round() {
-    for (int i = 0; i < 2; i++) {
-        hands[i] = Hand();
+    for (auto & hand : hands) {
+        hand = Hand();
     }
     done[0] = false;
     done[1] = true;
