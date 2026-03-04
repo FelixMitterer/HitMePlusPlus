@@ -47,14 +47,16 @@ void Game::play_round() {
         i++;
     }
     std::cout << "Dealer: " << dealer.get_hand_value() << '\n';
-    int x = 1;
-    for (Player player : players) {
-        if (!player.is_split){
-            std::cout << "Player " << x << ": " << player.hands[0].hand_value << '\n';
-            break;
+    int x = 0;
+    for (Player &player : players) {
+        x++;
+        if (player.is_split) {
+            std::cout << "Player " << x << ": first hand:" << player.hands[0].hand_value << '\n';
+            std::cout << "Player " << x << ": second hand: " << player.hands[1].hand_value << '\n';
         }
-        std::cout << "Player " << x << ": first hand:" << player.hands[0].hand_value << '\n';
-        std::cout << "Player " << x << ": second hand: " << player.hands[1].hand_value << '\n';
+        else {
+            std::cout << "Player " << x << ": " << player.hands[0].hand_value << '\n';
+        }
     }
     evaluate();
 }
@@ -72,16 +74,16 @@ void Game::reset_round() {
 
 bool Game::check_all_done() {
     bool result = dealer.done;
-    for (Player player: players) {
-        for (int i = 0; i < 2; i++) {
-            result = result && player.done[i];
+    for (Player &player: players) {
+        for (bool i : player.done) {
+            result = result && i;
         }
     }
     return result;
 }
 
 void Game::player_action_input(Player *player, int player_number) {
-    std::string hand_number_maybe = "";
+    std::string hand_number_maybe;
     if (player->is_split) {
         switch (player->hand_at_play) {
             case 0:
@@ -147,7 +149,7 @@ ActionType Game::parse_action(std::string input) {
 void Game::evaluate() {
     int i = 1;
     for ( Player &player : players) {
-        for (int j; j<2; j++) {
+        for (int j = 0; j<2; j++) {
             player.hand_at_play = j;
             if (!player.is_busted() && player.get_hand_value() > dealer.get_hand_value() or !player.is_busted() && dealer.is_busted()) {
                 player.cash += player.bets[j] *2;
