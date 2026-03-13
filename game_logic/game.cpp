@@ -110,6 +110,7 @@ void Game::player_action_input(Player *player, int player_number) {
         case Split:
             (*player).action(&card_handler, action, std::nullopt);
             player_action_input(player, player_number);
+            player_action_input(player, player_number);
             break;
         case Hit:
             int bet = 0;
